@@ -1,20 +1,61 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml" style="display: flex; flex-direction: column; height: 100%; ">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Schweizer Wasserfälle</title>
+    <link rel="stylesheet" th:href="@{/webjars/leaflet/1.7.1/leaflet.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}"/>
 </head>
-<body>
+<body style=" display: flex; flex-direction: column; height: 100%; ">
 
-<h1>Schweizer Wasserfall-Verzeichnis</h1>
+    <div class="container">
 
-<th:block>
-    <ul>
-        <th:block th:each="waterfall : ${waterfalls}">
-            <li><p th:text="${waterfall.title}"></p></li>
-        </th:block>
-    </ul>
-</th:block>
+
+
+        <div class="page-header" style="margin: 10pt; text-align: center;">
+
+        <h3>
+            Schweizer Wasserfall-Verzeichnis<br>
+            <small class="text-muted">Mit 400 Wasserfällen</small>
+        </h3>
+
+        </div>
+    </div>
+
+    <th:block>
+
+        <div id="map" style="flex-grow: 1; margin: 10pt;">
+
+        </div>
+
+    </th:block>
+
 
 </body>
+<script th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+<script th:src="@{/webjars/leaflet/1.7.1/leaflet.js}"></script>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    var latitude = '46.798541';
+    var longitude = '8.231794';
+
+    var map = L.map('map').setView([latitude, longitude], 8);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    /*[# th:each="waterfall : ${waterfalls}"]*/
+    var lat = /*[[${waterfall.lat}]]*/ 46.798541
+    var lon = /*[[${waterfall.lon}]]*/ 8.231794
+    var name = /*[[${waterfall.waterfall_name}]]*/ 'Wasserfall'
+
+    L.marker([lat, lon], {title: name}).addTo(map)
+        .bindPopup('<h5>' + name + '</h5>' + '<a class="btn btn-outline-primary" role="button" href="https://www.google.com/maps/?q=' + lat + ',' + lon + '" target="_blank">In Google Maps öffnen</a>');
+    /*[/]*/
+
+    /*]]>*/
+</script>
 </html>

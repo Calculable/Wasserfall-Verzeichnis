@@ -11,11 +11,32 @@ public class Waterfall {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    Long id;
 
-    @Column(columnDefinition = "TEXT")
-    String description;
+    String waterfall_name;
 
-    String title;
+    Long osm_id;
+
+    Float height_meters;
+
+    Boolean intermittent;
+
+    String wikidata_tag;
+
+    Double lat;
+
+    Double lon;
+
+    String name_german;
+
+    String name_english;
+
+    String name_french;
+
+    String name_italian;
+
+    String name_swiss_german;
+
+    String imageurl;
 
 }
