@@ -1,0 +1,15 @@
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.waterfall-container {
+    margin: 10pt;
+    text-align: center;
+}
+
+#map {
+    flex-grow: 1;
+    margin: 10pt;
+}
